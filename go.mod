@@ -1,6 +1,6 @@
-module myFreeMomHugs/internal
+module github.com/FreeMomHugs/myFMHInternal
 
-go 1.17
+go 1.15
 
 require google.golang.org/appengine/v2 v2.0.1
 
