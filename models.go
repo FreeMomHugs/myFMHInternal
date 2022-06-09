@@ -27,6 +27,26 @@ func GetUserByEmail(Email string, ctx context.Context) (*MyFMHUser, *datastore.K
 	return nil, nil
 }
 
+func GetUser(UserID string, ctx context.Context) (*MyFMHUser, *datastore.Key) {
+	q := datastore.NewQuery("myFMHUser").
+		Filter("UserID=", UserID)
+	b := new(bytes.Buffer)
+	var x MyFMHUser
+	for t := q.Run(ctx); ; {
+		key, err := t.Next(&x)
+		if err == datastore.Done {
+			break
+		}
+		if err != nil {
+			panic(err)
+			return &x, nil
+		}
+		fmt.Fprintf(b, "Key=%v\nWidget=%#v\n\n", key, x)
+		return &x, key
+	}
+	return nil, nil
+}
+
 type MyFMHUser struct {
 	UserID          string
 	Email           string
