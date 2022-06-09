@@ -7,7 +7,7 @@ import (
 	"google.golang.org/appengine/v2/datastore"
 )
 
-func GetUserByEmail(Email string, ctx context.Context) (*MyFMHUser, *datastore.Key) {
+func GetUserByEmail(ctx context.Context, Email string) (*MyFMHUser, *datastore.Key) {
 	q := datastore.NewQuery("myFMHUser").
 		Filter("Email=", Email)
 	b := new(bytes.Buffer)
@@ -27,7 +27,7 @@ func GetUserByEmail(Email string, ctx context.Context) (*MyFMHUser, *datastore.K
 	return nil, nil
 }
 
-func GetUser(UserID string, ctx context.Context) (*MyFMHUser, *datastore.Key) {
+func GetUser(ctx context.Context, UserID string) (*MyFMHUser, *datastore.Key) {
 	q := datastore.NewQuery("myFMHUser").
 		Filter("UserID=", UserID)
 	b := new(bytes.Buffer)
