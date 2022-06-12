@@ -5,6 +5,7 @@ import (
 	"context"
 	"fmt"
 	"google.golang.org/appengine/v2/datastore"
+	"log"
 )
 
 func GetUserByEmail(ctx context.Context, Email string) (*MyFMHUser, *datastore.Key) {
@@ -37,11 +38,12 @@ func GetChapter(ctx context.Context, id string) (*Chapter, *datastore.Key) {
 			break
 		}
 		if err != nil {
-			panic(err)
+			panic(err.Error())
 			return &x, nil
 		}
 		return &x, key
 	}
+	log.Println("No chapters with this ID found")
 	return nil, nil
 }
 
