@@ -28,13 +28,14 @@ func GetUserByEmail(ctx context.Context, Email string) (*MyFMHUser, *datastore.K
 	return nil, nil
 }
 
-func GetChapter(ctx context.Context, id string) (*Chapter, *datastore.Key) {
+func GetChapter(ctx context.Context, id string) *Chapter {
 	key := datastore.NewKey(ctx, "chapter", id, 0, nil)
 	var x Chapter
 	err := datastore.Get(ctx, key, &x)
 	if err != nil {
 		log.Println("unable to retrieve key " + err.Error())
 	}
+	return &x
 
 }
 
