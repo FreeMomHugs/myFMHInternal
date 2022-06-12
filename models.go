@@ -84,7 +84,7 @@ type MyFMHUser struct {
 type Chapter struct {
 	ChapterName  string
 	State        string
-	quickBooksID string
+	QuickBooksID string
 }
 
 type QBAccount struct {
