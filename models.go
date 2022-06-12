@@ -28,7 +28,7 @@ func GetUserByEmail(ctx context.Context, Email string) (*MyFMHUser, *datastore.K
 }
 
 func GetChapter(ctx context.Context, id string) (*Chapter, *datastore.Key) {
-	q := datastore.NewQuery("myFMHUser").
+	q := datastore.NewQuery("chapter").
 		Filter("Name/ID=", id)
 	var x Chapter
 	for t := q.Run(ctx); ; {
