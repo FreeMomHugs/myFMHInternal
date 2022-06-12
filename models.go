@@ -72,7 +72,7 @@ type MyFMHUser struct {
 	City            string
 	State           string
 	ZipCode         string
-	Affiliation     string
+	Affiliation     int
 	Title           string
 	ProfilePicture  string
 	AboutMe         string
