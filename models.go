@@ -28,8 +28,8 @@ func GetUserByEmail(ctx context.Context, Email string) (*MyFMHUser, *datastore.K
 	return nil, nil
 }
 
-func GetChapter(ctx context.Context, id string) *Chapter {
-	key := datastore.NewKey(ctx, "chapter", id, 0, nil)
+func GetChapter(ctx context.Context, id int) *Chapter {
+	key := datastore.NewKey(ctx, "chapter", "", id, nil)
 	var x Chapter
 	err := datastore.Get(ctx, key, &x)
 	if err != nil {
