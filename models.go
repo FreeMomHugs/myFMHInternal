@@ -27,6 +27,24 @@ func GetUserByEmail(ctx context.Context, Email string) (*MyFMHUser, *datastore.K
 	return nil, nil
 }
 
+func GetChapter(ctx context.Context, id string) (*Chapter, *datastore.Key) {
+	q := datastore.NewQuery("myFMHUser").
+		Filter("Name/ID=", id)
+	var x Chapter
+	for t := q.Run(ctx); ; {
+		key, err := t.Next(&x)
+		if err == datastore.Done {
+			break
+		}
+		if err != nil {
+			panic(err)
+			return &x, nil
+		}
+		return &x, key
+	}
+	return nil, nil
+}
+
 func GetUser(ctx context.Context, UserID string) (*MyFMHUser, *datastore.Key) {
 	q := datastore.NewQuery("myFMHUser").
 		Filter("UserID=", UserID)
@@ -67,6 +85,12 @@ type MyFMHUser struct {
 	RecoveryEmail   string
 	StripeAccountID string
 	LocalSlackID    string
+}
+
+type Chapter struct {
+	ChapterName  string
+	State        string
+	quickBooksID string
 }
 
 type QBAccount struct {
