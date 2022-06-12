@@ -29,22 +29,13 @@ func GetUserByEmail(ctx context.Context, Email string) (*MyFMHUser, *datastore.K
 }
 
 func GetChapter(ctx context.Context, id string) (*Chapter, *datastore.Key) {
-	q := datastore.NewQuery("chapter").
-		Filter("Name/ID=", id)
+	key := datastore.NewKey(ctx, "chapter", id, 0, nil)
 	var x Chapter
-	for t := q.Run(ctx); ; {
-		key, err := t.Next(&x)
-		if err == datastore.Done {
-			break
-		}
-		if err != nil {
-			panic(err.Error())
-			return &x, nil
-		}
-		return &x, key
+	err := datastore.Get(ctx, key, &x)
+	if err != nil {
+		log.Println("unable to retrieve key " + err.Error())
 	}
-	log.Println("No chapters with this ID found")
-	return nil, nil
+
 }
 
 func GetUser(ctx context.Context, UserID string) (*MyFMHUser, *datastore.Key) {
